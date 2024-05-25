@@ -4,9 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:views="clr-namespace:CryptoCurrency.Views"
+        xmlns:local="clr-namespace:CryptoCurrency.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" Background="Transparent">
+        Title="CRYPTIX" Height="450" Width="800" Background="Transparent">
+    <Window.DataContext>
+        <local:MainViewModel />
+    </Window.DataContext>
     <Grid>
-        <views:CryptoPage></views:CryptoPage>
+        <views:CryptoPage/>
     </Grid>
 </Window>

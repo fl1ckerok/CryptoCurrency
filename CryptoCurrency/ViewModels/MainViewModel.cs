@@ -12,14 +12,7 @@ namespace CryptoCurrency.ViewModels
 {
     public class MainViewModel : INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        // TODO: Зробити так, щоб забіндити ліст
-        CryptoList Cryptos = CoinCapApi.GetResultFromTask(CoinCapApi.ReturnList());
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         private ObservableCollection<Cryptocurrency> _cryptoList;
         public ObservableCollection<Cryptocurrency> CryptoList
@@ -27,14 +20,32 @@ namespace CryptoCurrency.ViewModels
             get { return _cryptoList; }
             set
             {
-                _cryptoList = value;
-                OnPropertyChanged(nameof(CryptoList));
+                if (_cryptoList != value)
+                {
+                    _cryptoList = value;
+                    OnPropertyChanged();
+                }
             }
         }
 
         public MainViewModel()
         {
-            CryptoList = Cryptos.Data;
+            LoadData();
+        }
+
+        private async void LoadData()
+        {
+            var cryptos = await CoinCapApi.ReturnList();
+            CryptoList = cryptos.Data;
+            foreach (var crypto in CryptoList)
+            {
+                Console.WriteLine($"Name: {crypto.Name}, Price: {crypto.PriceUsd}");
+            }
+        }
+
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
     }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -9,7 +10,8 @@ namespace CryptoCurrency.Models
 {
     public class CryptoList
     {
-        public ObservableCollection<Cryptocurrency> Data { get; }
+        [JsonProperty("data")]
+        public ObservableCollection<Cryptocurrency> Data { get; set; }
 
         public void GetData()
         {

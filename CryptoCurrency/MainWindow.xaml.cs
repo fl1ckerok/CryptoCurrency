@@ -1,4 +1,6 @@
-﻿using System.Text;
+﻿using CryptoCurrency.ViewModels;
+using CryptoCurrency.Views;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -19,6 +21,8 @@ namespace CryptoCurrency
         public MainWindow()
         {
             InitializeComponent();
+            CryptoPage cryptoPage = new CryptoPage();
+            cryptoPage.DataContext = new MainViewModel();
         }
     }
 }

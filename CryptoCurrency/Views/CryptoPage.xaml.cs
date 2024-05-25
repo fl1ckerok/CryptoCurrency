@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CryptoCurrency.Models;
+using CryptoCurrency.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +25,46 @@ namespace CryptoCurrency.Views
         public CryptoPage()
         {
             InitializeComponent();
+        }
+
+        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (sender is ListView listView && listView.SelectedItem is Cryptocurrency selectedCrypto)
+            {
+                var detailPage = new CryptoPageDetailed
+                {
+                    DataContext = selectedCrypto
+                };
+                Content = detailPage;
+            }
+        }
+
+        private async void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var assetID = SearchBar.Text.ToString();
+            Cryptocurrency crypto;
+            try
+            {
+                crypto = await CoinCapApi.ReturnList(assetID);
+            }
+            catch 
+            {
+                SearchBar.Text = $"There is no such a crypto like {assetID}";
+                return;
+            }
+            if (crypto != null)
+            {
+                var selectedCrypto = crypto;
+                var detailPage = new CryptoPageDetailed
+                {
+                    DataContext = selectedCrypto
+                };
+                Content = detailPage;
+            }
+            else
+            {
+                SearchBar.Text = $"There is no such a crypto like {assetID}";
+            }
         }
     }
 }
