@@ -43,7 +43,7 @@ namespace CryptoCurrency.Views
 
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
-            var assetID = SearchBar.Text.ToString();
+            var assetID = SearchBar.Text.ToLower();
             Cryptocurrency crypto;
             try
             {
