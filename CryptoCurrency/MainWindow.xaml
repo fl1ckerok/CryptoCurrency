@@ -6,7 +6,7 @@
         xmlns:views="clr-namespace:CryptoCurrency.Views"
         xmlns:local="clr-namespace:CryptoCurrency.ViewModels"
         mc:Ignorable="d"
-        Title="CRYPTIX" Height="450" Width="800" Background="Transparent">
+        Title="CRYPTIX" Height="470" Width="800" Background="Transparent">
     <Window.DataContext>
         <local:MainViewModel />
     </Window.DataContext>

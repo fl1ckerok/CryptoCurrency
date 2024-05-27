@@ -1,5 +1,6 @@
 ﻿using CryptoCurrency.Models;
 using CryptoCurrency.ViewModels;
+using CryptoCurrency.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,9 +32,10 @@ namespace CryptoCurrency.Views
         {
             if (sender is ListView listView && listView.SelectedItem is Cryptocurrency selectedCrypto)
             {
+                var chartViewModel = new ChartViewModel(selectedCrypto);
                 var detailPage = new CryptoPageDetailed
                 {
-                    DataContext = selectedCrypto
+                    DataContext = chartViewModel
                 };
                 Content = detailPage;
             }
@@ -54,10 +56,10 @@ namespace CryptoCurrency.Views
             }
             if (crypto != null)
             {
-                var selectedCrypto = crypto;
+                var chartViewModel = new ChartViewModel(crypto);
                 var detailPage = new CryptoPageDetailed
                 {
-                    DataContext = selectedCrypto
+                    DataContext = chartViewModel
                 };
                 Content = detailPage;
             }
@@ -65,6 +67,16 @@ namespace CryptoCurrency.Views
             {
                 SearchBar.Text = $"There is no such a crypto like {assetID}";
             }
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            var convertorViewModel = new ConvertorViewModel();
+            var convertorPage = new Convertor 
+            {
+                DataContext = convertorViewModel
+            };
+            Content = convertorPage;
         }
     }
 }

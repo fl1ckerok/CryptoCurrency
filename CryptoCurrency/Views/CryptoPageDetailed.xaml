@@ -3,57 +3,65 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:oxy="http://oxyplot.org/wpf"
-             xmlns:local="clr-namespace:CryptoCurrency.Views"
+             xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="470" d:DesignWidth="800">
     <Grid>
         <Rectangle Height="370" Width="700" RadiusX="20" RadiusY="20" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Rectangle.Fill>
                 <SolidColorBrush Color="WhiteSmoke"/>
             </Rectangle.Fill>
         </Rectangle>
-        <StackPanel HorizontalAlignment="Center" Margin="0,60,0,0">
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,60,0,40">
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{Binding Name}" FontWeight="Bold" FontSize="25"/>
+                <TextBlock Text="{Binding SelectedCrypto.Name}" FontWeight="Bold" FontSize="25"/>
                 <TextBlock Text=" " FontWeight="ExtraLight" FontSize="25"/>
-                <TextBlock Text="{Binding Symbol}" FontWeight="ExtraLight" FontSize="25"/>
+                <TextBlock Text="{Binding SelectedCrypto.Symbol}" FontWeight="ExtraLight" FontSize="25"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Price: " FontSize="16"/>
-                <TextBlock Text="{Binding PriceUsd}" FontSize="16"/>
+                <TextBlock Text="{Binding SelectedCrypto.PriceUsd}" FontSize="16"/>
                 <TextBlock Text="$" FontSize="16"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Rank: №" FontSize="16"/>
-                <TextBlock Text="{Binding Rank}" FontSize="16"/>
+                <TextBlock Text="{Binding SelectedCrypto.Rank}" FontSize="16"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Supply: " FontSize="16"/>
-                <TextBlock Text="{Binding Supply}" FontSize="16"/>
+                <TextBlock Text="{Binding SelectedCrypto.Supply}" FontSize="16"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Max Supply: " FontSize="16"/>
-                <TextBlock Text="{Binding MaxSupply}" FontSize="16"/>
+                <TextBlock Text="{Binding SelectedCrypto.MaxSupply}" FontSize="16"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Market capitalization: " FontSize="16"/>
-                <TextBlock Text="{Binding MarketCapUsd}" FontSize="16"/>
-            </StackPanel>            
+                <TextBlock Text="{Binding SelectedCrypto.MarketCapUsd}" FontSize="16"/>
+            </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Change % in 24H: " FontSize="16"/>
-                <TextBlock Text="{Binding ChangePercent24Hr}" FontSize="16"/>
+                <TextBlock Text="{Binding SelectedCrypto.ChangePercent24Hr}" FontSize="16"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Vwap in 24H: " FontSize="16"/>
-                <TextBlock Text="{Binding Vwap24Hr}" FontSize="16"/>
+                <TextBlock Text="{Binding SelectedCrypto.Vwap24Hr}" FontSize="16"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Explorer: " FontSize="16"/>
-                <TextBlock Text="{Binding Explorer}" FontSize="16"/>
+                <TextBlock Text="{Binding SelectedCrypto.Explorer}" FontSize="16"/>
             </StackPanel>
             <!--ButtonBack-->
-            <Button Height="20 " Content="Back" Click="Button_Click"> </Button>
+            <Button Height="20 " Content="Back" Click="Button_Click"/>
+            <!--Chart-->
+            <lvc:CartesianChart Series="{Binding SeriesCollection}" Margin="-40,10,-10,0" Height="113">
+                <lvc:CartesianChart.AxisX>
+                    <lvc:Axis Title="Date" Labels="{Binding Labels}"></lvc:Axis>
+                </lvc:CartesianChart.AxisX>
+                <lvc:CartesianChart.AxisY>
+                    <lvc:Axis Title="Price (USD)"></lvc:Axis>
+                </lvc:CartesianChart.AxisY>
+            </lvc:CartesianChart>
         </StackPanel>
     </Grid>
 </UserControl>
